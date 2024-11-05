@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <img src="" alt="" id="image">
+        <h1 id="followers">Flowers: </h1>
+    </div>
+</body>
+
+    <script>
+
+        const requestUrl ='https://api.github.com/users/hiteshchoudhary'
+        let data;
+
+        const xhr = new XMLHttpRequest();
+         xhr.open('GET', requestUrl)
+         xhr.onreadystatechange = function(){
+            console.log(xhr.readyState);
+            if(xhr.readyState ===4){
+                 data = JSON.parse(this.responseText) //this data is in string formate change it to object
+                 console.log(data.avatar_url)
+                 
+                 image.setAttribute('src',`${data.avatar_url}`)
+                 followers.innerHTML= data.followers;
+            }
+        }
+        xhr.send()
+         console.log(data)
+         const image = document.getElementById('image')
+         const followers = document.getElementById('followers')
+         
+    </script>
+
+</html>

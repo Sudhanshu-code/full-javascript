@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Closure aur chai</title>
+  </head>
+  <body style="background-color: #313131">
+    <button id="orange">Orange</button>
+    <button id="green">Green</button>
+  </body>
+
+  <script>
+    //Lexical Scoping : init() creates a local variable called name and a function called displayName(). The displayName() function is an inner function that is defined inside init() and is available only within the body of the init() function. Note that the displayName() function has no local variables of its own. However, since inner functions have access to the variables of outer functions, displayName() can access the variable name declared in the parent function, init().
+    //Run the code and notice that the console.log() statement within the displayName() function successfully displays the value of the name variable, which is declared in its parent function. This is an example of lexical scoping, which describes how a parser resolves variable names when functions are nested. The word lexical refers to the fact that lexical scoping uses the location where a variable is declared within the source code to determine where that variable is available. Nested functions have access to variables declared in their outer scope.
+
+    function init() {
+      let name = "Mozilla";
+      function displayName() {
+        console.log(name);
+      }
+      displayName();
+    }
+    init(); //output: Mozilla
+
+    function outer() {
+      let username = "hitesh";
+      // console.log("OUTER", secret);
+      function inner() {
+        let secret = "my123";
+        console.log("inner", username);
+      }
+      function innerTwo() {
+        console.log("innerTwo", username);
+        // console.log(secret);
+      }
+      inner();
+      innerTwo();
+    }
+    outer();
+    // console.log("TOO OUTER", username);
+
+    //Closure: Running this code has exactly the same effect as the previous example of the init() function above. What's different (and interesting) is that the displayName() inner function is returned from the outer function before being executed.
+    function makeFunc() {
+      const name = "Mozilla";
+      function displayName() {
+        console.log(name);
+      }
+      return displayName;
+    }
+
+    const myFunc = makeFunc();
+    myFunc(); //output: Mozilla
+  </script>
+  <script>
+    document.getElementById("orange").onclick = function () {
+      document.body.style.backgroundColor = `orange`;
+    };
+    document.getElementById("green").onclick = function () {
+      document.body.style.backgroundColor = `green`;
+    };
+
+    // this function will not work properly because here the onclick is expecting a function but here we are executing the function so the buttons willl not work
+    function clickHandler(color) {
+      document.body.style.backgroundColor = `${color}`;
+    }
+
+    document.getElementById("orange").onclick = clickHandler("orange");
+    document.getElementById("green").onclick = clickHandler("green");
+
+    //So we will use concept of Lexical Scoping & CLOSURE
+    // this
+    function clickHandler(color) {
+      return function () {
+        document.body.style.backgroundColor = `${color}`;
+      };
+    }
+
+    document.getElementById("orange").onclick = clickHandler("orange");
+    document.getElementById("green").onclick = clickHandler("green");
+  </script>
+</html>

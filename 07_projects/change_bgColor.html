@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        button{
+            padding: 15px;
+            margin: 10px;
+            border: 2px solid black;
+            border-radius: 10px;
+            color: white;
+        }
+        .btn1{
+            background-color: #000;
+        }
+        .btn2{
+            background-color: pink;
+            color: black;
+        }
+        .btn3{
+            background-color: orange;
+        }
+        .btn4{
+            background-color: yellow;
+            color: black;
+        }
+    </style>
+  </head>
+  <body>
+    <h2>Change Color of the background</h2>
+    <button class="btn1">Black</button>
+    <button class="btn2">Pink</button>
+    <button class="btn3">orange</button
+    ><button class="btn4">yellow</button>
+  </body>
+
+  <script>
+
+    const btns =document.querySelectorAll('button')
+    // console.log(btns)
+
+
+    btns.forEach((btn)=>{
+        btn.addEventListener("click", function(e){
+            const text = btn.innerText;
+            // console.log(text)
+            document.body.style.backgroundColor= `${text}`
+            if(text === "Black"){
+                document.querySelector('h2').style.color="white"
+            }else{
+                document.querySelector('h2').style.color="black"
+
+            }
+        });
+    })
+  </script>
+</html>

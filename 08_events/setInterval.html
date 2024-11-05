@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settimeout</title>
+  </head>
+  <body>
+    <h1>Hello sudhanshu gupta</h1>
+    <button id="start">start</button>
+    <button id="stop">stop</button>
+
+    <script>
+      const heading = document.querySelector("h1");
+      const start = document.querySelector("#start");
+      const stop = document.querySelector("#stop");
+      let interval;
+      function changeText() {
+        heading.innerText = `Your random number is -> ${Math.floor(
+          Math.random() * 100 + 1
+        )} `;
+      }
+
+      start.addEventListener("click", () => {
+        interval = setInterval(changeText, 1000);
+      });
+      stop.addEventListener("click", () => {
+        clearInterval(interval);
+        console.log("stopped");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        /* display: flex; */
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #212121;
+      }
+
+      .container {
+        display: none;
+        justify-content: center;
+        top: 50%;
+        align-items: center;
+      }
+
+      .left,
+      .right {
+        height: 300px;
+        width: 500px;
+      }
+
+      .check {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        width: 100px;
+        /* background-color: lightgreen; */
+        position: absolute;
+      }
+
+      .check img {
+        width: 50px;
+        height: 50px;
+      }
+
+      .left {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white; /* Set your desired color */
+        border-right: 2px solid black;
+        border-radius: 50px 0px 0px 50px;
+      }
+
+      .right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white; /* Set your desired color */
+        border-left: 2px solid black;
+        border-radius: 0px 50px 50px 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3 style="color: white; margin-left: 50%; font-size: 50px">
+      Score:
+      <h3
+        id="score"
+        style="color: white; margin-left: 50%; font-size: 50px"
+      ></h3>
+    </h3>
+    <div class="container">
+      <div class="left"><h1 class="leftText"></h1></div>
+      <div class="check"><img src="" alt="" id="result" /></div>
+      <div class="right"><h1 class="rightText"></h1></div>
+    </div>
+    <div>
+      <button
+        id="start"
+        style="
+          padding: 15px;
+          width: 150px;
+          background-color: #fff;
+          color: black;
+          border-radius: 10px;
+          font-size: 20px;
+          display: flex;
+          justify-content: center;
+          top: 50%;
+          margin-left: 50%;
+          align-items: center;
+        "
+      >
+        Start
+      </button>
+    </div>
+    <!-- <div><h2>if correct press right arrow</h2></div>
+    <div><h2>if wrong press left arrow</h2></div> -->
+
+    <!-- <input type="text" id="input">
+    <div ><span id="msg"></span>
+    </div>
+    <button>Click Me</button> -->
+  </body>
+  <script>
+    const startGame = document.querySelector(".container");
+    const leftText = document.querySelector(".leftText");
+    const rightTextColor = document.querySelector(".rightText");
+    const start = document.querySelector("#start");
+    const showResult = document.querySelector("#result");
+    const checkBox = document.querySelector(".check");
+    const score = document.querySelector("#score");
+
+    const colorArray = ["Blue", "Black", "Yellow", "Red"];
+
+    let gameScore = 0;
+
+    function getRandomNum() {
+      return parseInt(Math.random() * 4);
+    }
+
+    function generateRandomColor() {
+      leftText.innerHTML = `${colorArray[getRandomNum()]}`;
+      rightTextColor.style.color = `${colorArray[getRandomNum()]}`;
+      rightTextColor.innerHTML = `${colorArray[getRandomNum()]}`;
+    }
+
+    start.addEventListener("click", () => {
+      startGame.style.display = "flex";
+      start.style.display = "none";
+      generateRandomColor();
+    });
+
+    function hideResult() {
+      setInterval(() => {
+        checkBox.style.display = "none";
+      }, 2000);
+    }
+
+    function checkMatch(pressedKey) {
+      if (leftText.innerHTML.toLowerCase() === rightTextColor.style.color) {
+        if (pressedKey == "ArrowRight") {
+          checkBox.style.display = "flex";
+          showResult.setAttribute("src", "right.png");
+          gameScore++;
+          generateRandomColor();
+          hideResult();
+        } else {
+          checkBox.style.display = "flex";
+          showResult.setAttribute("src", "wrong.png");
+          gameScore--;
+          generateRandomColor();
+          hideResult();
+        }
+        score.innerHTML = gameScore;
+      } else {
+        if (pressedKey == "ArrowLeft") {
+          checkBox.style.display = "flex";
+          showResult.setAttribute("src", "right.png");
+          gameScore++;
+          generateRandomColor();
+          hideResult();
+        } else {
+          checkBox.style.display = "flex";
+          showResult.setAttribute("src", "wrong.png");
+          gameScore--;
+          generateRandomColor();
+          hideResult();
+        }
+        score.innerHTML = gameScore;
+      }
+      console.log(gameScore);
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (e.code == "ArrowRight" || e.code == "ArrowLeft") {
+        checkMatch(e.code);
+      }
+    });
+  </script>
+</html>

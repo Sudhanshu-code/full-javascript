@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dom Learning</title>
+  </head>
+  <body style="background-color: #212121; color: #fff">
+    <ul class="language">
+      <li>Python</li>
+    </ul>
+  </body>
+  <script>
+    //not optimised
+    function addLanguage(langName) {
+      const li = document.createElement("li");
+      li.innerHTML = `${langName}`;
+      const parent = document.querySelector(".language");
+      parent.appendChild(li);
+    }
+    addLanguage("Java");
+    addLanguage("React");
+
+    //optimised Code
+    function addNewLang(langName) {
+      const li = document.createElement("li");
+      li.appendChild(document.createTextNode(langName));
+      const parent = document.querySelector(".language");
+      parent.appendChild(li);
+    }
+    addNewLang("GoLang");
+    addNewLang("Rust");
+    addNewLang("NextJS");
+
+    //Edit
+
+    const secondLang = document.querySelector("li:nth-child(2)");
+    const newli = document.createElement("li");
+    // newli.textContent ="Javascript" // both works
+    newli.appendChild(document.createTextNode("JavaScript")); // optimised
+    secondLang.replaceWith(newli);
+
+    //Edit
+    const forthLang = document.querySelector("li:nth-child(3)");
+
+    // const newLang = document.createElement("li");
+    // newLang.appendChild(document.createTextNode("React"));
+    // forthLang.replaceWith(newLang);
+
+    forthLang.outerHTML = "<li>NodeJs</li>";
+
+    //remove elements
+
+    const target = document.querySelector("li:first-child");
+    target.remove();
+  </script>
+</html>

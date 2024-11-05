@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clock</title>
+  </head>
+  <body style="background-color: #212121">
+    <div
+      style="
+        background-color: white;
+        position: relative;
+        width: 500px;
+        text-align: center;
+        padding: 15px;
+        border-radius: 15px;
+        left: 45%;
+      "
+    >
+      <p>Local Time</p>
+      <p
+        id="showTime"
+        style="
+          background-color: orange;
+          border: 2px solid white;
+          border-radius: 15px;
+          padding: 20px;
+          width: 90px;
+          align-items: center;
+          left: 41%;
+          position: relative;
+        "
+      ></p>
+    </div>
+  </body>
+
+  <script>
+    const time = document.querySelector("#showTime");
+
+    setInterval(function () {
+      const date = new Date();
+      time.innerHTML = date.toLocaleTimeString();
+    }, 1000);
+
+  </script>
+</html>
